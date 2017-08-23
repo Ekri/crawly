@@ -4,3 +4,4 @@ __pycache__/
 env/
 crawler.db
 retrieved.db
+word.db
