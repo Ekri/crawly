@@ -6,32 +6,32 @@ from RetrieverCache import RetrieverCache
 
 
 class website_retriever(object):
-    def __init__(self, cache=None, wordCache=None, maxPages=10):
+    def __init__(self, cache=None, word_cache=None, max_pages=10):
         self.cache = cache
-        self.maxPages = maxPages
-        self.wordCache = wordCache
+        self.maxPages = max_pages
+        self.wordCache = word_cache
 
     def retrieve(self, url, phrase=None):
         self.links = []
         self.links.append(url)
-        numberVisited = 0
+        number_visited = 0
 
         # for link in BeautifulSoup(response, "html.parser", parse_only=SoupStrainer('a')):
         #     if link.has_attr('href'):
         #         self.links.append(link['href'])
         #         print link['href']
-        while numberVisited < self.maxPages:
-            htttp = httplib2.Http()
-            currentUrl = self.links[numberVisited]
-            numberVisited = numberVisited + 1
+        while number_visited < self.maxPages:
+            http = httplib2.Http()
+            current_url = self.links[number_visited]
+            number_visited = number_visited + 1
             try:
-                status, response = htttp.request(currentUrl)
-                self.parseHtml(response)
-                self.seekWord(currentUrl, response, phrase)
+                status, response = http.request(current_url)
+                self.parse_html(response)
+                self.seek_word(current_url, response, phrase)
             except httplib2.HttpLib2Error as err:
                 print err
 
-    def parseHtml(self, response):
+    def parse_html(self, response):
         for link in BeautifulSoup(response, "html.parser", parse_only=SoupStrainer('a')):
             if link.has_attr('href'):
                 linkRetrieved = link['href']
@@ -39,7 +39,7 @@ class website_retriever(object):
                 self.cache.set(linkRetrieved)
                 self.links.append(linkRetrieved)
 
-    def seekWord(self, url, htlm, word):
+    def seek_word(self, url, htlm, word):
         # soup = BeautifulSoup(htlm, "html.parser")
         # result = soup.findAll(text=word)
         # print "result: ", result
@@ -48,5 +48,5 @@ class website_retriever(object):
             self.wordCache.set(url)
 
 
-retriv = website_retriever(RetrieverCache("retrieved.db"), RetrieverCache("word.db"), maxPages=1)
+retriv = website_retriever(RetrieverCache("retrieved.db"), RetrieverCache("word.db"), max_pages=1)
 retriv.retrieve("https://www.reuters.com/article/us-usa-afghanistan-minerals-idUSKCN1B102L", "dupa")
