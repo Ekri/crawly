@@ -45,8 +45,9 @@ class website_retriever(object):
         # print "result: ", result
         website = urllib2.urlopen(url).read()
         if word in website:
+            print "Word is in website: ", url
             self.wordCache.set(url)
 
 
 retriv = website_retriever(RetrieverCache("retrieved.db"), RetrieverCache("word.db"), max_pages=1)
-retriv.retrieve("https://www.reuters.com/article/us-usa-afghanistan-minerals-idUSKCN1B102L", "dupa")
+retriv.retrieve("https://www.reuters.com/article/us-usa-afghanistan-minerals-idUSKCN1B102L", "reuters")
