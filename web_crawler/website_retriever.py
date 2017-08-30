@@ -49,5 +49,5 @@ class website_retriever(object):
             self.wordCache.set(url)
 
 
-retriv = website_retriever(RetrieverCache("retrieved.db"), RetrieverCache("word.db"), max_pages=1)
+retriv = website_retriever(RetrieverCache("db/retrieved.db"), RetrieverCache("word.db"), max_pages=1)
 retriv.retrieve("https://www.reuters.com/article/us-usa-afghanistan-minerals-idUSKCN1B102L", "reuters")
