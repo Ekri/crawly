@@ -43,11 +43,15 @@ class website_retriever(object):
         # soup = BeautifulSoup(htlm, "html.parser")
         # result = soup.findAll(text=word)
         # print "result: ", result
-        website = urllib2.urlopen(url).read()
-        if word in website:
-            print "Word is in website: ", url
-            self.wordCache.set(url)
+        try:
+            website = urllib2.urlopen(url).read()
+            if word in website:
+                print "Word is in website: ", url
+                self.wordCache.set(url)
+
+        except Exception as exc:
+            print exc
 
 
-retriv = website_retriever(RetrieverCache("retrieved.db"), RetrieverCache("word.db"), max_pages=1)
-retriv.retrieve("https://www.reuters.com/article/us-usa-afghanistan-minerals-idUSKCN1B102L", "reuters")
+retriv = website_retriever(RetrieverCache("dbs/faith/retrieved.db"), RetrieverCache("dbs/faith/matches.db"), max_pages=100)
+retriv.retrieve("http://biblia.deon.pl/", "wiara")

@@ -39,3 +39,7 @@ class RetrieverCache(object):
         # my cursor after the call. I could have create a new cursor tho.
         # ...Oh well
         return [row[0] for row in self.cursor.fetchall()]
+
+    def get_all(self):
+        self.cursor.execute("SELECT * FROM sites")
+        return [row[0] for row in self.cursor.fetchall()]

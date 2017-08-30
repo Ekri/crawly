@@ -1,9 +1,7 @@
-import re
-from inner_crawler import Crawler
-from SimpleCache import CrawlerCache
-
+from RetrieverCache import RetrieverCache
 
 if __name__ == "__main__":
-    crawler = Crawler(CrawlerCache("crawler.db"))
-    root_re = re.compile('^/$').match
-    crawler.crawl('http://techcrunch.com/', no_cache=root_re)
+    reader = RetrieverCache("dbs/faith/retrieved.db")
+    list1 = reader.get_all()
+    for url in list1:
+        print url
