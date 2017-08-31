@@ -16,10 +16,6 @@ class website_retriever(object):
         self.links.append(url)
         number_visited = 0
 
-        # for link in BeautifulSoup(response, "html.parser", parse_only=SoupStrainer('a')):
-        #     if link.has_attr('href'):
-        #         self.links.append(link['href'])
-        #         print link['href']
         while number_visited < self.maxPages:
             http = httplib2.Http()
             current_url = self.links[number_visited]
@@ -27,7 +23,7 @@ class website_retriever(object):
             try:
                 status, response = http.request(current_url)
                 self.parse_html(response)
-                self.seek_word(current_url, response, phrase)
+                self.seek_word(current_url, phrase)
             except httplib2.HttpLib2Error as err:
                 print err
 
@@ -39,10 +35,7 @@ class website_retriever(object):
                 self.cache.set(linkRetrieved)
                 self.links.append(linkRetrieved)
 
-    def seek_word(self, url, htlm, word):
-        # soup = BeautifulSoup(htlm, "html.parser")
-        # result = soup.findAll(text=word)
-        # print "result: ", result
+    def seek_word(self, url, word):
         try:
             website = urllib2.urlopen(url).read()
             if word in website:
@@ -53,5 +46,6 @@ class website_retriever(object):
             print exc
 
 
-retriv = website_retriever(RetrieverCache("dbs/faith/retrieved.db"), RetrieverCache("dbs/faith/matches.db"), max_pages=100)
+retriv = website_retriever(RetrieverCache("dbs/faith/retrieved.db"), RetrieverCache("dbs/faith/matches.db"),
+                           max_pages=100)
 retriv.retrieve("http://biblia.deon.pl/", "wiara")
