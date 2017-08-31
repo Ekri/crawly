@@ -2,7 +2,7 @@ import httplib2
 import urllib2
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
-from RetrieverCache import RetrieverCache
+from urls_cache import UrlCache
 
 
 class website_retriever(object):
@@ -45,7 +45,7 @@ class website_retriever(object):
         except Exception as exc:
             print exc
 
-retriv = website_retriever(RetrieverCache("dbs/faith/retrieved.db"), RetrieverCache("dbs/faith/matches.db"),
+retriv = website_retriever(UrlCache("dbs/faith/retrieved.db"), UrlCache("dbs/faith/matches.db"),
                            max_pages=100)
 retriv.retrieve("http://biblia.deon.pl/", "wiara")
 

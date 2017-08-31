@@ -1,7 +1,7 @@
-from RetrieverCache import RetrieverCache
+from urls_cache import UrlCache
+from db_uris import READ_URI
 
-if __name__ == "__main__":
-    reader = RetrieverCache("dbs/faith/retrieved.db")
-    list1 = reader.get_all()
-    for url in list1:
-        print url
+reader = UrlCache(READ_URI)
+list1 = reader.get_all()
+for url in list1:
+    print url

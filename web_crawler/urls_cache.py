@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class RetrieverCache(object):
+class UrlCache(object):
     def __init__(self, db_file):
         self.conn = sqlite3.connect(db_file)
         c = self.conn.cursor()
