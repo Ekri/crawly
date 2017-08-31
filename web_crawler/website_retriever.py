@@ -10,6 +10,11 @@ class website_retriever(object):
         self.cache = cache
         self.maxPages = max_pages
         self.wordCache = word_cache
+        self.consumers = []
+
+    def addConsumers(self, *args):
+        for consumer in args:
+            self.consumers.append(consumer)
 
     def retrieve(self, url, phrase=None):
         self.links = []
@@ -45,7 +50,7 @@ class website_retriever(object):
         except Exception as exc:
             print exc
 
-retriv = website_retriever(UrlCache("dbs/faith/retrieved.db"), UrlCache("dbs/faith/matches.db"),
+
+retriv = website_retriever(UrlCache("db/retrieved.db"), UrlCache("db/matches.db"),
                            max_pages=100)
 retriv.retrieve("http://biblia.deon.pl/", "wiara")
-
