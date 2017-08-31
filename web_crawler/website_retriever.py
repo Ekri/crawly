@@ -45,7 +45,7 @@ class website_retriever(object):
         except Exception as exc:
             print exc
 
-
 retriv = website_retriever(RetrieverCache("dbs/faith/retrieved.db"), RetrieverCache("dbs/faith/matches.db"),
                            max_pages=100)
 retriv.retrieve("http://biblia.deon.pl/", "wiara")
+

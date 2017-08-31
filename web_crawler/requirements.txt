@@ -1,3 +1,3 @@
-virtualenv -p python3 env
+virtualenv -p python env
 pip install urllib2
 pip install beautifulsoup4

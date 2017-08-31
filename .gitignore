@@ -6,3 +6,5 @@ crawler.db
 retrieved.db
 word.db
 web_crawler/dbs/
+db/
+
