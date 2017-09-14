@@ -1,7 +1,7 @@
 import sqlite3
 
 
-class RetrieverCache(object):
+class UrlCache(object):
     def __init__(self, db_file):
         self.conn = sqlite3.connect(db_file)
         c = self.conn.cursor()
@@ -38,4 +38,8 @@ class RetrieverCache(object):
         # could use fetchone and yield but I want to release
         # my cursor after the call. I could have create a new cursor tho.
         # ...Oh well
+        return [row[0] for row in self.cursor.fetchall()]
+
+    def get_all(self):
+        self.cursor.execute("SELECT * FROM sites")
         return [row[0] for row in self.cursor.fetchall()]

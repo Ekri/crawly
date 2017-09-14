@@ -1,6 +1,4 @@
 # add mechanism for quering multiple words
 	-by percentage
 	-by similar words - maybe levensteinh distance
-# add abstraction for adding additional functionality on base crawler
-# make different run classes for both searching and then reading
 

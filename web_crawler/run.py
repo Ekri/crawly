@@ -1,9 +1,7 @@
-import re
-from inner_crawler import Crawler
-from SimpleCache import CrawlerCache
+from urls_cache import UrlCache
+from db_uris import READ_URI
 
-
-if __name__ == "__main__":
-    crawler = Crawler(CrawlerCache("crawler.db"))
-    root_re = re.compile('^/$').match
-    crawler.crawl('http://techcrunch.com/', no_cache=root_re)
+reader = UrlCache(READ_URI)
+list1 = reader.get_all()
+for url in list1:
+    print url
