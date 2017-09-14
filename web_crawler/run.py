@@ -1,4 +1,4 @@
-from urls_cache import UrlCache
+from cache.urls_cache import UrlCache
 from db_uris import READ_URI
 
 reader = UrlCache(READ_URI)
