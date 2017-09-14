@@ -1,7 +1,7 @@
 from cache.urls_cache import UrlCache
-from db_uris import READ_URI
+import db_uris
 
-reader = UrlCache(READ_URI)
+reader = UrlCache(db_uris.READ_URI)
 list1 = reader.get_all()
 for url in list1:
     print url

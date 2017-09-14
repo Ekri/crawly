@@ -11,7 +11,7 @@ class UrlCache(object):
         self.cursor = self.conn.cursor()
 
     def set(self, url):
-        print "url", url
+        # print "url", url
 
         """
         store the content for a given domain and relative url

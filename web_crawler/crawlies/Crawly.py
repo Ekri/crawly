@@ -23,6 +23,6 @@ class WordsCrawly(Crawly):
                 self.word_cache.set(url)
 
             else:
-                print "Doesn`t find word in: " , url
+                print "Doesn`t find word in: ", url
         except Exception as exc:
             print exc
