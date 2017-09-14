@@ -2,7 +2,7 @@ import httplib2
 from bs4 import BeautifulSoup
 from bs4 import SoupStrainer
 from datetime import datetime
-import urlparse
+from helpers.urls_nicer import URLRepairer
 
 HTML_PARSER = "html.parser"
 
@@ -23,20 +23,20 @@ class WebsiteRetriever(object):
 
     def retrieve(self, url):
         self.urls.append(url)
-        self.domain = ""
+        repairer = URLRepairer()
 
         for url in self.urls:
             if not self.loop_condition():
                 break
 
             http = httplib2.Http()
-            current_url = self.repair_url(url)
+
+            current_url = repairer.repair_url_with_domain(url)
 
             try:
                 print "Fetching: " + current_url
                 status, response = http.request(current_url)
-                self.domain = urlparse.urljoin(current_url, '/')
-                print "Domain: ", self.domain
+                repairer.get_domain(current_url)
                 self.parse_html(response)
                 for crawly in self.consumers:
                     crawly.crawl(current_url)
@@ -53,12 +53,6 @@ class WebsiteRetriever(object):
                 print "retrieving...", url_retrieved
                 self.cache_url(url_retrieved)
                 self.urls.append(url_retrieved)
-
-    def repair_url(self, url):
-        if url.startswith("http://") or url.startswith("https://"):
-            return url
-        else:
-            return self.domain + url
 
     def cache_url(self, url):
         self.cache.set(url)

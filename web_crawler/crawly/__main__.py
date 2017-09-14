@@ -1,5 +1,5 @@
-from websiteretriever import WebsiteRetriever
-from websiteretriever import EndlessWebsiteRetriever
+from website_retriever import WebsiteRetriever
+from website_retriever import EndlessWebsiteRetriever
 from cache.urls_cache import UrlCache
 from crawlies.Crawly import WordsCrawly
 import db_uris
