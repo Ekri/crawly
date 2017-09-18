@@ -38,9 +38,12 @@ class WordsCrawly(CachedCrawly, WebsiteCrawly):
 
 
 class MultipleWordsCrawly(CachedCrawly, WebsiteCrawly):
-    def __init__(self, word_cache, *args):
+    def __init__(self, word_cache, percentage, *args):
         super(MultipleWordsCrawly, self).__init__(word_cache)
         self.words = args
+        self.percentage = percentage
+        self.match = 0.0
+        self.hits = 0
 
     def crawl(self, url):
         super(MultipleWordsCrawly, self).crawl(url)
@@ -48,8 +51,15 @@ class MultipleWordsCrawly(CachedCrawly, WebsiteCrawly):
             website = self.get_website(url)
             for word in self.words:
                 if word in website:
-                    print "Word: ", word, " is in website: ", url
-                    self.cache_url(url)
-                print "Doesn`t find word", word, "in: ", url
+                    self.update_match()
+                    if self.match >= self.percentage:
+                        print "Website match", url
+                        self.cache_url(url)
+                else:
+                    print "Doesn`t find word", word, "in: ", url
         except Exception as exc:
             print exc
+
+    def update_match(self):
+        self.hits += 1
+        self.match = 100 * float(self.hits) / float(len(self.words))
