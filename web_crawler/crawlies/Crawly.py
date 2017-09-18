@@ -55,6 +55,7 @@ class MultipleWordsCrawly(CachedCrawly, WebsiteCrawly):
                     if self.match >= self.percentage:
                         print "Website match", url
                         self.cache_url(url)
+                        break
                 else:
                     print "Doesn`t find word", word, "in: ", url
         except Exception as exc:
