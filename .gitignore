@@ -2,9 +2,5 @@
 __pycache__/
 *.pyc
 env/
-crawler.db
-retrieved.db
-word.db
-web_crawler/dbs/
 db/
-
+*.db

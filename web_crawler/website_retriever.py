@@ -15,6 +15,7 @@ class WebsiteRetriever(object):
         self.maxPages = max_pages
         self.consumers = []
         self.urls = []
+        self.visitedPages = []
         self.visited = 0
 
     def add_crawlies(self, *args):
@@ -44,6 +45,8 @@ class WebsiteRetriever(object):
             except httplib2.HttpLib2Error as err:
                 print "Fetching error: ", err
 
+            self.visitedPages.append(current_url)
+            self.remove_item(current_url)
             self.visited += 1
 
     def parse_html(self, html):
@@ -52,13 +55,20 @@ class WebsiteRetriever(object):
                 url_retrieved = tag['href']
                 print "retrieving...", url_retrieved
                 self.cache_url(url_retrieved)
-                self.urls.append(url_retrieved)
+                if url_retrieved not in self.visitedPages:
+                    self.urls.append(url_retrieved)
 
     def cache_url(self, url):
         self.cache.set(url)
 
     def loop_condition(self):
         return self.visited < self.maxPages
+
+    def remove_item(self, item):
+        try:
+            self.urls.remove(item)
+        except ValueError:
+            pass
 
 
 class TimingWebsiteRetriever(WebsiteRetriever):
