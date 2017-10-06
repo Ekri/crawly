@@ -1,5 +1,5 @@
 # add mechanism for quering multiple words
-	- by similar words - maybe levensteinh distance
+	- by similar words - maybe levenstein distance
     - maybe searching words not similar in 'construction' but similar in meaning
     - add different languages -> maybe some 'bundles' with language words structure for searching
     - rethink array as data handler

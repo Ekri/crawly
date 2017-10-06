@@ -6,8 +6,8 @@ import os
 
 parentPath = os.path.dirname(os.getcwd())
 
-writePath = db_uris.UrisHelper.get_path(parentPath, db_uris.FAITH_WRITE_READ_URI)
-matchesPath = db_uris.UrisHelper.get_path(parentPath, db_uris.FAITH_WRITE_READ_MATCHES_URI)
+writePath = db_uris.UrisHelper.get_path_with_parent(db_uris.FAITH_WRITE_READ_URI)
+matchesPath = db_uris.UrisHelper.get_path_with_parent(db_uris.FAITH_WRITE_READ_MATCHES_URI)
 
 retriv = WebsiteRetriever(UrlCache(writePath), max_pages=10)
 retriv.add_crawlies(WordsCrawly(UrlCache(matchesPath), "wiara"))
